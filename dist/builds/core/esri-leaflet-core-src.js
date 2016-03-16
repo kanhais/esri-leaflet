@@ -1,5 +1,5 @@
-/*! esri-leaflet - v1.0.0-rc.2 - 2015-04-29
-*   Copyright (c) 2015 Environmental Systems Research Institute, Inc.
+/*! esri-leaflet - v1.0.0-rc.2 - 2016-03-16
+*   Copyright (c) 2016 Environmental Systems Research Institute, Inc.
 *   Apache License*/
 (function (factory) {
   //define an AMD module that relies on 'leaflet'

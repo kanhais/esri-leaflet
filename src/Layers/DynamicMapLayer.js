@@ -101,7 +101,17 @@ EsriLeaflet.Layers.DynamicMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
     }
 
     if(this.options.layerDefs){
-      params.layerDefs = JSON.stringify(this.options.layerDefs);
+      if(Object.keys(this.options.layerDefs).length > 1) {
+        var layerDefs = '';
+        for(var layerdef in this.options.layerDefs) {
+          if(this.options.layerDefs.hasOwnProperty(layerdef)){
+            layerDefs += layerdef + ':' + this.options.layerDefs[layerdef] + ';';
+          }
+        }
+        params.layerDefs = layerDefs;
+      }else {
+        params.layerDefs = JSON.stringify(this.options.layerDefs);
+      }
     }
 
     if(this.options.timeOptions){

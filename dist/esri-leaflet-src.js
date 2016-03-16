@@ -1,5 +1,5 @@
-/*! esri-leaflet - v1.0.0-rc.2 - 2015-04-29
-*   Copyright (c) 2015 Environmental Systems Research Institute, Inc.
+/*! esri-leaflet - v1.0.0-rc.2 - 2016-03-16
+*   Copyright (c) 2016 Environmental Systems Research Institute, Inc.
 *   Apache License*/
 (function (factory) {
   //define an AMD module that relies on 'leaflet'
@@ -1965,7 +1965,17 @@ EsriLeaflet.Layers.DynamicMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
     }
 
     if(this.options.layerDefs){
-      params.layerDefs = JSON.stringify(this.options.layerDefs);
+      if(Object.keys(this.options.layerDefs).length > 1) {
+        var layerDefs = '';
+        for(var layerdef in this.options.layerDefs) {
+          if(this.options.layerDefs.hasOwnProperty(layerdef)){
+            layerDefs += layerdef + ':' + this.options.layerDefs[layerdef] + ';';
+          }
+        }
+        params.layerDefs = layerDefs;
+      }else {
+        params.layerDefs = JSON.stringify(this.options.layerDefs);
+      }
     }
 
     if(this.options.timeOptions){
@@ -2004,6 +2014,7 @@ EsriLeaflet.Layers.dynamicMapLayer = function(url, options){
 EsriLeaflet.dynamicMapLayer = function(url, options){
   return new EsriLeaflet.Layers.DynamicMapLayer(url, options);
 };
+
 
 EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
 
